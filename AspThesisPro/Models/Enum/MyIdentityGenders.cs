@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AspThesisPro.Models.Enum
 {
-    public enum MyIdentityGender
+    public enum MyIdentityGenders
     {
         [Display(Name = "Male")]
         Male,

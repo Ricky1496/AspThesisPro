@@ -28,7 +28,7 @@ namespace AspThesisPro.Models
 
         [Display(Name = "Gender")]
         [Required]
-        public MyIdentityGender Gender { get; set; }
+        public MyIdentityGenders Gender { get; set; }
 
         [Display(Name = "Phone Number")]
         [DataType(DataType.PhoneNumber)]
@@ -37,6 +37,6 @@ namespace AspThesisPro.Models
 
         [Display(Name = "Role Type")]
         [Required]
-        public string Roletype { get; set; }
+        public MyIdentityRoles Roletype { get; set; }
     }
 }

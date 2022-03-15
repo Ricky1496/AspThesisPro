@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using AspThesisPro.Models.Enum;
 
 namespace AspThesisPro.Models
 {
@@ -27,7 +28,7 @@ namespace AspThesisPro.Models
 
         [Display(Name = "Gender")]
         [Required]
-        public string Gender { get; set; }
+        public MyIdentityGender Gender { get; set; }
 
         [Display(Name = "Phone Number")]
         [DataType(DataType.PhoneNumber)]

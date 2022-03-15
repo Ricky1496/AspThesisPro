@@ -14,7 +14,7 @@ namespace AspThesisPro.Models.Enum
         [Display(Name = "Female")]
         Female,
         
-        [Display(Name = "Third Gender")]
-        ThirdGender
+        [Display(Name = "Others")]
+        Others
     }
 }

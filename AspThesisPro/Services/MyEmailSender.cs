@@ -65,12 +65,12 @@ namespace AspThesisPro.Services
                 client.SendMailAsync(mailMessage).Wait();
                 return Task.CompletedTask;
             }
-            catch(SmtpFailedRecipientsException exp)
+            catch ( SmtpFailedRecipientsException exp)
             {
                 myexception = new MyEmailSenderException(
                     $"Unable to send eamil to {exp.FailedRecipient}",exp);
             }
-            catch (SmtpFailedRecipientException exp)
+            catch ( SmtpFailedRecipientException exp)
             {
                 myexception = new MyEmailSenderException(
                     $"Unable to send email to {exp.FailedRecipient}", exp);

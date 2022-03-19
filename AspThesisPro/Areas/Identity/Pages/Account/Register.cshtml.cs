@@ -74,11 +74,6 @@ namespace AspThesisPro.Areas.Identity.Pages.Account
             [Required]
             public MyIdentityGenders Gender { get; set; }
 
-            [Display(Name = "Phone Number")]
-            [DataType(DataType.PhoneNumber)]
-            [Required(ErrorMessage = "Phone number is Required")]
-            public string PhoneNumber { get; set; }
-
             [Display(Name = "Role Type")]
             [Required]
             public MyIdentityRoles RoleType { get; set; }

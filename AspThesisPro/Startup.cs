@@ -62,10 +62,12 @@ namespace AspThesisPro
 
             app.UseEndpoints(endpoints =>
             {
+                // regiter the route for area
                 endpoints.MapControllerRoute(
                     name : "areas",
                     pattern : "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-
+                
+                // register the default route 
                 endpoints.MapControllerRoute(
                     name : "default",
                     pattern : "{controller}/{action=Index}/{id?}");

@@ -23,11 +23,6 @@ namespace AspThesisPro.Models
         [Required]
         public MyIdentityGenders Gender { get; set; }
 
-        [Display(Name = "Phone Number")]
-        [DataType(DataType.PhoneNumber)]
-        [Required(ErrorMessage = "Phone number is Required")]
-        public string Phonenumber { get; set; }
-
         [Display(Name = "Role Type")]
         [Required]
         public MyIdentityRoles RoleType { get; set; }

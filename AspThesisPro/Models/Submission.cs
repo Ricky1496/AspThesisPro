@@ -28,7 +28,6 @@ namespace AspThesisPro.Models
         [StringLength (150)]
         public string SubmissionFileUrl { get; set; }
 
-        [Display(Name = "Submission File Content Type")]
         [Required]
         [StringLength(60)]
         public string SubmissionFileContentType { get; set; }

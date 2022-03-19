@@ -19,13 +19,6 @@ namespace AspThesisPro.Models
         [StringLength(60, ErrorMessage = "{0} should have atleast {1} Characters.")]
         public string DisplayName { get; set; }
 
-        [Display(Name = "Date of Birth")]
-
-        [Required]
-        [PersonalData]              // for GDPR Compliance
-        [Column(TypeName = "smalldatetime")]
-        public DateTime DateOfBirth { get; set; }
-
         [Display(Name = "Gender")]
         [Required]
         public MyIdentityGenders Gender { get; set; }
@@ -37,6 +30,6 @@ namespace AspThesisPro.Models
 
         [Display(Name = "Role Type")]
         [Required]
-        public MyIdentityRoles Roletype { get; set; }
+        public MyIdentityRoles RoleType { get; set; }
     }
 }

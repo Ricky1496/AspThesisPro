@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AspThesisPro.Models
 {
-    public class MyIdentityRole
+    public class MyIdentityRole : IdentityRole<Guid>
     {
         [Display(Name = "Description")]
         [StringLength(100, ErrorMessage = "{0} cannot be more than {1} characters.")]

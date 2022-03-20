@@ -25,7 +25,7 @@ namespace AspThesisPro.Models.Enum
         [Display(Name = "Civil Engineering")]
         CivilEngineering,
 
-        [Display(Name = "Biotechnolgy")]
-        Biotechnology,
+        [Display(Name = "BioTechnolgy")]
+        BioTechnology,
     }
 }

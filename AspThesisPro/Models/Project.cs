@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AspThesisPro.Models
@@ -14,12 +15,12 @@ namespace AspThesisPro.Models
         public short ProjectId { get; set; }
 
         [Display(Name ="Project Name")]
-        [Required]
+        [Required(ErrorMessage = "{0} cannot be empty.")]
         [StringLength(50,ErrorMessage ="{0} Cannot have more than {1} characters.")]
         public string ProjectName { get; set; }
 
         [Display(Name ="Project Descripton")]
-        [Required]
+        [Required(ErrorMessage = "{0} cannot be empty.")]
         [StringLength (100,ErrorMessage ="{0} cannot have more than {1} characters.")]
         public string ProjectDescription { get; set; }
 
@@ -35,7 +36,7 @@ namespace AspThesisPro.Models
         #region Navigation Properties to the Student Model
 
         [ForeignKey(nameof(Project.Student))]
-        public string Email { get; set; }
+        public short StudentId { get; set; }
 
         public Student Student { get; set; }
 

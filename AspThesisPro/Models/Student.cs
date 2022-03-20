@@ -9,28 +9,30 @@ namespace AspThesisPro.Models
     [Table("Students")]
     public class Student
     {
-        #region 
-        [Key]       
-        [ForeignKey(nameof(Student.User))]
-        public string Email { get; set; }
-
-        public MyIdentityUser User { get; set; }
-
-        #endregion
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public short StudentId { get; set; }
 
         [Display(Name ="Enrollment Id")]
+        [Required(ErrorMessage ="{0} cannot be empty.")]
         public int EnrollmentId { get; set; }
 
         [Display(Name ="Department Name")]
-        [Required]
+        [Required(ErrorMessage = "{0} cannot be empty.")]
         [StringLength(100,ErrorMessage ="{0} cannot be more than {1} characters.")]
         public MyDepartmentNames DepartmentName{ get; set; }
 
         [Display(Name ="Batch Name")]
-        [Required]
+        [Required(ErrorMessage = "{0} cannot be empty.")]
         [StringLength(100, ErrorMessage = "{0} cannot be more than {1} characters.")]
         public string BatchName{ get; set; }
 
+        #region       
+        [ForeignKey(nameof(Student.User))]
+        public Guid Id { get; set; }
 
+        public MyIdentityUser User { get; set; }
+
+        #endregion
     }
 }

@@ -8,10 +8,10 @@ namespace AspThesisPro.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string SubjectId { get; set; }
+        public short SubjectId { get; set; }
 
         [Display(Name = "Subject Name")]
-        [Required]
+        [Required(ErrorMessage = "{0} cannot be empty.")]
         [StringLength(50,ErrorMessage ="{0} cannot be more than {1} characters.")]
         public string SubjectName { get; set; }
 

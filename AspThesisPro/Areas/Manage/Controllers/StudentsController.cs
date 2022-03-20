@@ -12,23 +12,24 @@ using Microsoft.AspNetCore.Authorization;
 namespace AspThesisPro.Areas.Manage.Controllers
 {
     [Area("Manage")]
-    [Authorize(Roles ="Admin")]
-    public class SubjectsController : Controller
+    [Authorize(Roles = "Student, Admin")]
+    public class StudentsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public SubjectsController(ApplicationDbContext context)
+        public StudentsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Manage/Subjects
+        // GET: Manage/Students
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Subjects.ToListAsync());
+            var applicationDbContext = _context.Students.Include(s => s.User);
+            return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Manage/Subjects/Details/5
+        // GET: Manage/Students/Details/5
         public async Task<IActionResult> Details(short? id)
         {
             if (id == null)
@@ -36,39 +37,42 @@ namespace AspThesisPro.Areas.Manage.Controllers
                 return NotFound();
             }
 
-            var subject = await _context.Subjects
-                .FirstOrDefaultAsync(m => m.SubjectId == id);
-            if (subject == null)
+            var student = await _context.Students
+                .Include(s => s.User)
+                .FirstOrDefaultAsync(m => m.StudentId == id);
+            if (student == null)
             {
                 return NotFound();
             }
 
-            return View(subject);
+            return View(student);
         }
 
-        // GET: Manage/Subjects/Create
+        // GET: Manage/Students/Create
         public IActionResult Create()
         {
+            ViewData["Id"] = new SelectList(_context.Users, "Id", "DisplayName");
             return View();
         }
 
-        // POST: Manage/Subjects/Create
+        // POST: Manage/Students/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SubjectId,SubjectName")] Subject subject)
+        public async Task<IActionResult> Create([Bind("StudentId,EnrollmentId,DepartmentName,BatchName,Id")] Student student)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(subject);
+                _context.Add(student);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(subject);
+            ViewData["Id"] = new SelectList(_context.Users, "Id", "DisplayName", student.Id);
+            return View(student);
         }
 
-        // GET: Manage/Subjects/Edit/5
+        // GET: Manage/Students/Edit/5
         public async Task<IActionResult> Edit(short? id)
         {
             if (id == null)
@@ -76,22 +80,23 @@ namespace AspThesisPro.Areas.Manage.Controllers
                 return NotFound();
             }
 
-            var subject = await _context.Subjects.FindAsync(id);
-            if (subject == null)
+            var student = await _context.Students.FindAsync(id);
+            if (student == null)
             {
                 return NotFound();
             }
-            return View(subject);
+            ViewData["Id"] = new SelectList(_context.Users, "Id", "DisplayName", student.Id);
+            return View(student);
         }
 
-        // POST: Manage/Subjects/Edit/5
+        // POST: Manage/Students/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(short id, [Bind("SubjectId,SubjectName")] Subject subject)
+        public async Task<IActionResult> Edit(short id, [Bind("StudentId,EnrollmentId,DepartmentName,BatchName,Id")] Student student)
         {
-            if (id != subject.SubjectId)
+            if (id != student.StudentId)
             {
                 return NotFound();
             }
@@ -100,12 +105,12 @@ namespace AspThesisPro.Areas.Manage.Controllers
             {
                 try
                 {
-                    _context.Update(subject);
+                    _context.Update(student);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SubjectExists(subject.SubjectId))
+                    if (!StudentExists(student.StudentId))
                     {
                         return NotFound();
                     }
@@ -116,10 +121,11 @@ namespace AspThesisPro.Areas.Manage.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(subject);
+            ViewData["Id"] = new SelectList(_context.Users, "Id", "DisplayName", student.Id);
+            return View(student);
         }
 
-        // GET: Manage/Subjects/Delete/5
+        // GET: Manage/Students/Delete/5
         public async Task<IActionResult> Delete(short? id)
         {
             if (id == null)
@@ -127,30 +133,31 @@ namespace AspThesisPro.Areas.Manage.Controllers
                 return NotFound();
             }
 
-            var subject = await _context.Subjects
-                .FirstOrDefaultAsync(m => m.SubjectId == id);
-            if (subject == null)
+            var student = await _context.Students
+                .Include(s => s.User)
+                .FirstOrDefaultAsync(m => m.StudentId == id);
+            if (student == null)
             {
                 return NotFound();
             }
 
-            return View(subject);
+            return View(student);
         }
 
-        // POST: Manage/Subjects/Delete/5
+        // POST: Manage/Students/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(short id)
         {
-            var subject = await _context.Subjects.FindAsync(id);
-            _context.Subjects.Remove(subject);
+            var student = await _context.Students.FindAsync(id);
+            _context.Students.Remove(student);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool SubjectExists(short id)
+        private bool StudentExists(short id)
         {
-            return _context.Subjects.Any(e => e.SubjectId == id);
+            return _context.Students.Any(e => e.StudentId == id);
         }
     }
 }

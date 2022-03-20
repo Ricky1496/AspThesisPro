@@ -2,7 +2,7 @@
 
 namespace AspThesisPro.Models.Enum
 {
-    public enum MyIdentityRoles
+    public enum MyIdentityRoleNames
     {
         [Display(Name = "Student")]
         Student,

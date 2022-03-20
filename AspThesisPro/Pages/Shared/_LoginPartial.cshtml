@@ -1,27 +1,37 @@
-﻿@using AspThesisPro.Models
-@using Microsoft.AspNetCore.Identity
+﻿@using AspThesisPro.Models;
+@using AspThesisPro.Models.Enum;
 @inject SignInManager<MyIdentityUser> SignInManager
-@inject UserManager<MyIdentityUser> UserManager
+@inject UserManager<MyIdentityUser> _userManager
 
-<ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
-{
-    <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
-    </li>
-    <li class="nav-item">
-        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post" >
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-        </form>
-    </li>
+@{
+    var user = await _userManager.GetUserAsync(User);
 }
-else
-{
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
-}
-</ul>
+
+<div class="link" style="line-height: 2.5rem;">
+
+    @if (SignInManager.IsSignedIn(User) && user != null)
+    {
+            <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Welcome @user.DisplayName!</a>
+
+        @if (await _userManager.IsInRoleAsync(user, MyIdentityRoleNames.Admin.ToString()))
+        {
+                <a asp-area="Manage" asp-controller="Users" asp-action="Index">Users</a>
+                <a asp-area="Manage" asp-controller="Subjects" asp-action="Index">Subjects</a>
+        }
+        @if (await _userManager.IsInRoleAsync(user, MyIdentityRoleNames.Admin.ToString()))
+        {
+                <a asp-area="Manage" asp-controller="Subjects" asp-action="Index">Products</a>
+        }
+            <form class="form-inline"
+              asp-area="Identity" asp-page="/Account/Logout"
+              method="post">
+                <button type="submit" class="nav-link btn btn-primary">Logout</button>
+            </form>
+    }
+    else
+    {
+            <a asp-area="Identity" asp-page="/Account/Register">Register</a>
+            <a asp-area="Identity" asp-page="/Account/Login">Login</a>
+    }
+
+</div>

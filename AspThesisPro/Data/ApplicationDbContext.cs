@@ -10,6 +10,7 @@ namespace AspThesisPro.Data
     public class ApplicationDbContext : IdentityDbContext<MyIdentityUser, MyIdentityRole, Guid>
     {
         public DbSet<Subject> Subjects { get; set; }
+        public DbSet<Student> Students { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

@@ -36,18 +36,22 @@ namespace AspThesisPro.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            [Display(Name = "Display Name")]
+            [Required(ErrorMessage = "{0} cannot be empty")]
+            [MinLength(2)]
+            [StringLength(60, ErrorMessage = "{0} should have atleast {1} Characters.")]
+            public string DisplayName { get; set; }
         }
 
-        private async Task LoadAsync(MyIdentityUser user)
+        private void LoadUserData(MyIdentityUser user)
         {
-            var userName = await _userManager.GetUserNameAsync(user);
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-
-            Username = userName;
+            Username = user.UserName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = user.PhoneNumber,
+                DisplayName = user.DisplayName,
             };
         }
 
@@ -59,7 +63,7 @@ namespace AspThesisPro.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            await LoadAsync(user);
+            LoadUserData(user);
             return Page();
         }
 
@@ -73,7 +77,7 @@ namespace AspThesisPro.Areas.Identity.Pages.Account.Manage
 
             if (!ModelState.IsValid)
             {
-                await LoadAsync(user);
+                LoadUserData(user);
                 return Page();
             }
 

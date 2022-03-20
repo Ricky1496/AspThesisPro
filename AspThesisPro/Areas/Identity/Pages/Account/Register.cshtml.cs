@@ -76,7 +76,7 @@ namespace AspThesisPro.Areas.Identity.Pages.Account
 
             [Display(Name = "Role Type")]
             [Required]
-            public MyIdentityRoles RoleType { get; set; }
+            public MyIdentityRoleNames RoleType { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)

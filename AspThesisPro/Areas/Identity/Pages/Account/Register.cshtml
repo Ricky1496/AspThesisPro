@@ -66,34 +66,16 @@
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
 
-            <div>
-                <label asp-for = "Input.RoleType" class = "text-danger"></label>
-                <br />
-                <div class = "btn-group btn-group-toggle" data-toggle = "buttons">
-                    <label class="btn btn-secondary">
-                        <input asp-for="Input.RoleType" type = "radio" class = "form-check-input"
-                                id = "Input.RoleType.Admin" name = "Input.RoleType"
-                                value = "@MyIdentityRoles.Admin" />
-                        Admin
-                    </label>
-                </div>
-                <div class = "btn-group btn-group-toggle" data-toggle = "buttons">
-                    <label class="btn btn-secondary">
-                        <input asp-for="Input.RoleType" type = "radio" class = "form-check-input"
-                                id = "Input.RoleType.Student" name = "Input.RoleType"
-                                value = "@MyIdentityRoles.Student" />
-                        Student
-                    </label>
-                </div>
-                <div class = "btn-group btn-group-toggle" data-toggle = "buttons">
-                    <label class="btn btn-secondary">
-                        <input asp-for="Input.RoleType" type = "radio" class = "form-check-input"
-                                id = "Input.RoleType.Faculty" name = "Input.RoleType"
-                                value = "@MyIdentityRoles.Faculty" />
-                        Faculty
-                    </label>
-                </div>
+            <div class = "form-group">
+                <label asp-for="Input.RoleType">Choose Your Role:</label>
+                <select asp-for ="Input.RoleType" class = "form-control" >
+                    <option value="Admin">Admin</option>
+                    <option value="Faculty">Faculty</option>
+                    <option value="Student">Student</option>
+                </select>
+                <span asp-validation-for="Input.RoleType" class="text-danger"></span>
             </div>
+
             <br />
             <button type="submit" class="btn btn-primary">Register</button>
         </form>

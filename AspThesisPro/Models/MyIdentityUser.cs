@@ -25,6 +25,6 @@ namespace AspThesisPro.Models
 
         [Display(Name = "Role Type")]
         [Required]
-        public MyIdentityRoles RoleType { get; set; }
+        public MyIdentityRoleNames RoleType { get; set; }
     }
 }

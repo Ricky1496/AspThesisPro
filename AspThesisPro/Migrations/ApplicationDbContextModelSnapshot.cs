@@ -140,9 +140,10 @@ namespace AspThesisPro.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("DepartmentName")
+                    b.Property<string>("DepartmentName")
+                        .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("EnrollmentId")
                         .HasColumnType("int");

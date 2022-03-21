@@ -60,6 +60,7 @@ namespace AspThesisPro.Areas.Manage.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> Create([Bind("StudentId,EnrollmentId,DepartmentName,BatchName,Id")] Student student)
         {
             if (ModelState.IsValid)

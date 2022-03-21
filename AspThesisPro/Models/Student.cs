@@ -20,7 +20,7 @@ namespace AspThesisPro.Models
         [Display(Name ="Department Name")]
         [Required(ErrorMessage = "{0} cannot be empty.")]
         [StringLength(100,ErrorMessage ="{0} cannot be more than {1} characters.")]
-        public MyDepartmentNames DepartmentName{ get; set; }
+        public string DepartmentName{ get; set; }
 
         [Display(Name ="Batch Name")]
         [Required(ErrorMessage = "{0} cannot be empty.")]
